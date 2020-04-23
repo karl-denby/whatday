@@ -1,6 +1,5 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
     <WhatDayIsIt v-bind:day=day />
   </div>
 </template>
@@ -24,7 +23,6 @@ export default {
   methods: {
     async getDay() {
       const api_url ="https://api.karldenby.com/dayofweek";
-
       console.log(`Using the url: ${api_url}`)
       const res = await fetch(api_url)
       const data = await res.json();
