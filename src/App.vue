@@ -1,17 +1,36 @@
 <template>
   <div id="app">
     <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <WhatDayIsIt v-bind:day=day />
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import WhatDayIsIt from './components/WhatDayIsIt.vue'
 
 export default {
   name: 'App',
   components: {
-    HelloWorld
+    WhatDayIsIt
+  },
+  data () {
+    return {
+      day: null
+    }
+  },
+  mounted () {
+    this.getDay();
+  },
+  methods: {
+    async getDay() {
+      const api_url ="https://api.karldenby.com/dayofweek";
+
+      console.log(`Using the url: ${api_url}`)
+      const res = await fetch(api_url)
+      const data = await res.json();
+      console.log(`Data returned is ${data.day}`)
+      this.day = data.day;
+    }
   }
 }
 </script>
